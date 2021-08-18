@@ -13,7 +13,7 @@ class FifoCache {
     return this.table[args];
   }
   miss(result, ...args) {
-    if (this.counter.length > this.size) {
+    if (this.counter.length >= this.size) {
       let dequeued = this.counter.shift();
       delete this.table[dequeued];
     }

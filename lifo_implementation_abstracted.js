@@ -13,7 +13,7 @@ class lifoCache {
       return this.table[args];
     }
     miss(result, ...args) {
-      if (this.counter.length > this.size) {
+      if (this.counter.length >= this.size) {
         let popped = this.counter.pop();
         delete this.table[popped];
       }
