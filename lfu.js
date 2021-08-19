@@ -1,61 +1,53 @@
-class LFUCache {
+export class LFUCache {
   constructor(n) {
     this.size = n;
     this.table = {};
     this.counter = [];
   }
-  has(...args) {
-    if (this.table.hasOwnProperty(args)) {
-      this.counter[args]++;
+  has(key) {
+    console.log("has:")
+    console.log("key: " + key);
+    console.log(this.table);
+    console.log(`returns: ${this.table.hasOwnProperty(key)}`);
+    console.log();
+    if (this.table.hasOwnProperty(key)) {
       return true;
     }
     return false;
   }
-  hit(...args) {
-    this.counter[args]++;
-    return this.table[args];
+  hit(key) {
+    console.log(`hit. Key is ${key}`);
+    console.log(this.table);
+    console.log(`returns ${this.table[key]}`);
+    console.log();
+    this.counter[key]++;
+    return this.table[key];
   }
-  miss(result, ...args) {
+  miss(key, value) {
+    console.log(`miss: key: ${key} and value: ${value}`);
+    console.log(this.table);
     if (Object.keys(this.table).length >= this.size) {
       let lowest;
       let lowestKey;
-      for (let key in this.counter) {
+      for (let k in this.counter) {
         if (lowest == undefined) {
           lowest = this.counter[key];
-          lowestKey = key;
+          lowestKey = k;
         } else {
-          if (lowest > this.counter[key]) {
-            lowest = this.counter[key];
-            lowestKey = key;
+          if (lowest > this.counter[k]) {
+            lowest = this.counter[k];
+            lowestKey = k;
           }
         }
       }
       delete this.table[lowestKey];
       delete this.counter[lowestKey];
     }
-    this.table[args] = result;
-    this.counter[args] = 1;
+    this.table[key] = value;
+    this.counter[key] = 1;
+    console.log();
+    console.log(`this.table after addition`);
+    console.log(this.table);
+    console.log();
   }
 }
-
-
-let fiboLfuCache = new LFUCache(5);
-function cacheThisFunction(cache, f) {
-  return (...args) => {
-    if (cache.has(...args)) {
-      return cache.hit(...args);
-    }
-    let result = f(...args);
-    cache.miss(result, ...args);
-    return result;
-  };
-}
-
-let memoizedFiboLfu = cacheThisFunction(fiboLfuCache, (n) => {
-  if (n == 1 || n == 2) {
-    return n;
-  }
-  return memoizedFiboLfu(n - 2) + memoizedFiboLfu(n - 1);
-});
-
-console.log(memoizedFiboLfu(55));

@@ -1,5 +1,5 @@
 
-class TTLCache {
+export class TTLCache {
   constructor(n, time) {
 //'time' to be in seconds
     this.size = n;
@@ -7,65 +7,41 @@ class TTLCache {
     this.table = {};
     this.accessed = {};
   }
-  has(...args) {
-    return this.table.hasOwnProperty(args);
+  has(key) {
+    return this.table.hasOwnProperty(key);
   }
-  hit(...args) {
-    this.accessed[args] = Date.now();
+  hit(key) {
+    this.accessed[key] = Date.now();
     let current = Date.now();
-    for(let key in this.accessed){
-        if(current - this.accessed[key] > this.timeLimit){
-            delete this.table[key];
-            delete this.accessed[key];
+    for(let k in this.accessed){
+        if(current - this.accessed[k] > this.timeLimit){
+            delete this.table[k];
+            delete this.accessed[k];
         }
     }
-    return this.table[args];
+    return this.table[key];
   }
-  miss(result, ...args) {
+  miss(key, value) {
     let current = Date.now();
-    for(let key in this.accessed){
-        if(current - this.accessed[key] > this.timeLimit){
-            delete this.table[key];
-            delete this.accessed[key];
+    for(let k in this.accessed){
+        if(current - this.accessed[k] > this.timeLimit){
+            delete this.table[k];
+            delete this.accessed[k];
         }
     }
     if (Object.keys(this.table).length >= this.size) {
       let least = Date.now();
       let candidateKey;
-      for (let key in this.accessed) {
-        if (this.accessed[key] < least) {
-          least = this.accessed[key];
-          candidateKey = key;
+      for (let k in this.accessed) {
+        if (this.accessed[k] < least) {
+          least = this.accessed[k];
+          candidateKey = k;
         }
       }
       delete this.table[candidateKey];
       delete this.accessed[candidateKey];
     }
-    this.table[args] = result;
-    this.accessed[args] = Date.now;
+    this.table[key] = value;
+    this.accessed[key] = Date.now;
   }
 }
-
-let fiboTtlCache = new TTLCache(5, 10);
-
-
-function cacheThisFunction(cache, f) {
-  return (...args) => {
-    if (cache.has(...args)) {
-      return cache.hit(...args);
-    }
-    let result = f(...args);
-    cache.miss(result, ...args);
-    return result;
-  };
-}
-
-
-let memoizedFiboTtl = cacheThisFunction(fiboTtlCache, (n) => {
-  if (n == 0 || n == 1) {
-    return n;
-  }
-  return memoizedFiboTtl(n - 2) + memoizedFiboTtl(n - 1);
-});
-
-console.log(memoizedFiboTtl(50));
