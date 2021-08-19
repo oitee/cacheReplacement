@@ -15,7 +15,7 @@ function fibo(n){
 }
 ```
 
-However, this problem can be fixed if we memoize the said function, such that return values of previous function calls are stored. This can be done by creating a cache object by invoking any of the classes provided in this library.
+However, this problem can be fixed if we memoize the said function, such that return values of previous function calls are stored. This can be done by creating a cache object by using any of the classes provided in this library.
 
 This library implements the following cache replacement policies:
 
@@ -35,22 +35,22 @@ This library implements the following cache replacement policies:
 
 ## Usage
 
-To use this library, a cache object will need be created by invoking the relevant class (implementing the relevant cache replacement policy). Thereafter, while accessing and adding new items to the cache, relevant methods will need to be invoked.
+To use this library, a cache object will need be created by using the relevant class (implementing the relevant cache replacement policy). Thereafter, while accessing and adding new items to the cache, relevant methods will need to be invoked.
 
 ### Creating a cache object
 
-To create a cache object, the JavaScript file containing the relevant cache replacement policy will need to be imported, followed by invoking the corresponding constructor (by using the `new` keyword). Importantly, while creating a cache object, the size of the object needs to be passed as a parameter. 
+To create a cache object, the JavaScript file containing the relevant cache replacement policy will need to be imported, followed by using the corresponding class (by using the `new` keyword). Importantly, while creating a cache object, the size of the object needs to be passed as a parameter. 
 
 For example, a cache object that implementing LRU policy can be implemented in the following manner:
 
 ```js
 import * as lru from "lru.js"
-let newObject = new LRUCache(4);
+let cache = new LRUCache(4);
 ```
 
-Here is a list of all the cache replacement policies implemented in the library, along with the corresponding names of the files and their constructors:
+Here is a list of all the cache replacement policies implemented in the library, along with the corresponding names of the files and their classes:
 
-| Cache Replacement Polciy      | File Name | Constructor | 
+| Cache Replacement Polciy      | File Name | Class       | 
 | ----------------------------- | --------- | ----------- |
 | First-in-first-out (FIFO)     | fifo.js   |FIFOCache    |
 | Last-in-first-out (LIFO)      | lifo.js   |LIFOCache    |
@@ -65,10 +65,10 @@ Here is a list of all the cache replacement policies implemented in the library,
 Once a cache object is created, the method `has` can be invoked to check a specific value is present in that cache, by passing its corresponding key. This method will always either return `true` or `false`.
 
 ```js
-import * as lru from "lru.js"
-let newObject = new LRUCache(4);
+import * as lru from "lru.js";
+let cache = new LRUCache(4);
 
-newObject.has(2);// false
+cache.has(2);// false
 ```
 
 ### hit
@@ -76,11 +76,11 @@ newObject.has(2);// false
 The method `hit` is meant to be invoked to access the corresponding value of a key present in the cache. This method presumes the existence of the key. Thus, it should only be invoked if the `has` method returns `true`.
 
 ```js
-import * as lru from "lru.js"
-let newObject = new LRUCache(4);
+import * as lru from "lru.js";
+let cache = new LRUCache(4);
 
-if(newObject.has(2)){
-    return newObject.hit(2);
+if(cache.has(2)){
+    return cache.hit(2);
 }
 ```
 
@@ -89,14 +89,14 @@ if(newObject.has(2)){
 The method `miss` is meant to add a key-value pair that is currently not present in the cache. This method presumes the absence of the key-value pair. Thus, it should be invoked only when the `has` method returns `false` for a given key. It is important to note that while calling `miss`, the first argument should be the key and the latter parameter should be the value. Also, this method will not return any value. 
 
 ```js
-import * as lru from "lru.js"
-let newObject = new LRUCache(4);
+import * as lru from "lru.js";
+let cache = new LRUCache(4);
 
-if(newObject.has(2)){
-    return newObject.hit(2);
+if(cache.has(2)){
+    return cache.hit(2);
 }
 else{
-    newObject.miss(2, "two");
+    cache.miss(2, "two");
 }
 ```
 
