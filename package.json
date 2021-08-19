@@ -1,0 +1,20 @@
+{
+  "name": "cachereplacement",
+  "version": "1.0.0",
+  "description": "This library implements some common cache replacement policies. This API is inspired from this [Clojure repository](https://github.com/clojure/core.cache).",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oitee/cacheReplacement.git"
+  },
+  "author": "Otee",
+  "type": "module",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oitee/cacheReplacement/issues"
+  },
+  "homepage": "https://github.com/oitee/cacheReplacement#readme"
+}
