@@ -1,6 +1,6 @@
 //Class for all creating cache objects
 //following LIFO policy
-class lifoCache {
+class LIFOCache {
     constructor(n) {
       this.size = n;
       this.table = {};
@@ -23,7 +23,7 @@ class lifoCache {
   }
   //Creating a new cache object
   //by invoking lifoCache
-  let lifoCacheForFibo = new lifoCache(5);
+  let lifoCacheForFibo = new LIFOCache(5);
   
   //Function that accepts: a cache object, and a function
   // It will invoke has(), hit() and miss() of the cache object

@@ -1,4 +1,4 @@
-class MruCache {
+class MRUCache {
   constructor(n) {
     this.size = n;
     this.table = {};
@@ -30,7 +30,7 @@ class MruCache {
   }
 }
 
-let mruCacheForFibo = new MruCache(10);
+let mruCacheForFibo = new MRUCache(10);
 
 //Function that accepts: a cache object, and a function
 // It will invoke has(), hit() and miss() of the cache object

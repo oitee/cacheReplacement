@@ -1,4 +1,4 @@
-class RandomCache {
+class RRCache {
   constructor(n) {
     this.size = n;
     this.table = {};
@@ -19,7 +19,7 @@ class RandomCache {
   }
 }
 
-let fiboRandomCache = new RandomCache(5);
+let fiboRandomCache = new RRCache(5);
 function cacheThisFunction(cache, f) {
   return (...args) => {
     if (cache.has(...args)) {

@@ -1,6 +1,6 @@
 //Class for all creating cache objects
 //following FIFO policy
-class FifoCache {
+class FIFOCache {
   constructor(n) {
     this.size = n;
     this.table = {};
@@ -23,7 +23,7 @@ class FifoCache {
 }
 //Creating a new cache object
 //by invoking FifoCache
-let fifoCacheForFibo = new FifoCache(3);
+let fifoCacheForFibo = new FIFOCache(3);
 
 //Function that accepts: a cache object, and a function
 // It will invoke has(), hit() and miss() of the cache object

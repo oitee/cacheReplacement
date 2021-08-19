@@ -1,4 +1,4 @@
-class LeastFrequentCache {
+class LFUCache {
   constructor(n) {
     this.size = n;
     this.table = {};
@@ -39,7 +39,7 @@ class LeastFrequentCache {
 }
 
 
-let fiboLfuCache = new LeastFrequentCache(5);
+let fiboLfuCache = new LFUCache(5);
 function cacheThisFunction(cache, f) {
   return (...args) => {
     if (cache.has(...args)) {

@@ -1,6 +1,6 @@
-//Class for all creating cache objects
+//Class for creating cache objects
 //following LRU policy
-class LruCache {
+class LRUCache {
   constructor(n) {
     this.size = n;
     this.table = {};
@@ -33,7 +33,7 @@ class LruCache {
 }
 //Creating a new cache object
 //by invoking LRUCache
-let lruCacheForFibo = new LruCache(3);
+let lruCacheForFibo = new LRUCache(3);
 
 //Function that accepts: a cache object, and a function
 // It will invoke has(), hit() and miss() of the cache object

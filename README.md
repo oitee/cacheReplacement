@@ -84,7 +84,7 @@ if(newObject.has(2)){
 }
 ```
 
-#### miss
+### miss
 
 The method `miss` is meant to add a key-value pair that is currently not present in the cache. This method presumes the absence of the key-value pair. Thus, it should be invoked only when the `has` method returns `false` for a given key. Importantly, this method will not return any value.
 
