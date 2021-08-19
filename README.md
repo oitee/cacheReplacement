@@ -86,7 +86,7 @@ if(newObject.has(2)){
 
 ### miss
 
-The method `miss` is meant to add a key-value pair that is currently not present in the cache. This method presumes the absence of the key-value pair. Thus, it should be invoked only when the `has` method returns `false` for a given key. Importantly, this method will not return any value.
+The method `miss` is meant to add a key-value pair that is currently not present in the cache. This method presumes the absence of the key-value pair. Thus, it should be invoked only when the `has` method returns `false` for a given key. It is important to note that while calling `miss`, the first argument should be the key and the latter parameter should be the value. Also, this method will not return any value. 
 
 ```js
 import * as lru from "lru.js"
@@ -96,7 +96,7 @@ if(newObject.has(2)){
     return newObject.hit(2);
 }
 else{
-    newObject.miss(2, "three");
+    newObject.miss(2, "two");
 }
 ```
 
